@@ -1,0 +1,12 @@
+<div class="weekly-view">
+  <h3>{{ getFormattedWeek() }}</h3>
+  <div class="weekly-grid">
+    <div *ngFor="let day of daysInWeek" class="day-column">
+      <div class="day-header">{{ day | date: 'EEE, dd.MM' }}</div>
+      <div *ngFor="let hour of hours" class="hour-row">
+        <div class="hour-label">{{ hour }}:00</div>
+        <!-- Możesz dodać dynamiczne wydarzenia -->
+      </div>
+    </div>
+  </div>
+</div>

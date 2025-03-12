@@ -1,0 +1,12 @@
+<aside [class.collapsed]="collapsed">
+  <div class="sidebar-content" *ngIf="!collapsed">
+    <button class="create-btn">
+      <mat-icon>add</mat-icon> Create
+    </button>
+    <div class="mini-calendar">
+      <app-mini-calendar></app-mini-calendar>
+    </div>
+    <ul class="calendar-list">
+    </ul>
+  </div>
+</aside>

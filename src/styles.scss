@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;   /* Zapewnia, że HTML i body zajmują pełną wysokość ekranu */
+  width: 100%;
+  margin: 0;      /* Usuwamy domyślne marginesy */
+  padding: 0;     /* Usuwamy domyślne paddingi */
+}
+
+app-root {
+  display: flex;
+  flex-direction: column; /* Dodaj flex-direction, jeśli masz elastyczne elementy */
+  height: 100%;   /* Zapewnia, że app-root zajmuje całą dostępną wysokość */
+  width: 100%;
+}

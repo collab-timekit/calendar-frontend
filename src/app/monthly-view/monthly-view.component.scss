@@ -1,0 +1,50 @@
+.monthly-view {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  margin: 50px;
+  font-family: Arial, sans-serif;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+h3 {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); // 7 kolumn na dni tygodnia
+  grid-template-rows: repeat(6, 1fr); // 6 wierszy na dni miesiąca
+  width: 100%;
+}
+
+.day-header {
+  text-align: center;
+  height: 10px;
+}
+
+.day-cell {
+  border: 1px solid #ddd;
+  flex-grow: 1;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column; /* Nowość - elementy w kolumnie */
+  justify-content: flex-start;
+  padding: 10px;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.outside-month {
+  background-color: #f8f8f8;
+  color: #aaa;
+}
+
+.day-number {
+  text-align: center;
+}

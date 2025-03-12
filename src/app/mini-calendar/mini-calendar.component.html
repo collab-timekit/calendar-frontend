@@ -1,0 +1,23 @@
+<div class="mini-calendar">
+  <div class="calendar-header">
+    <span class="month-year">{{ currentMonth }} {{ currentYear }}</span>
+    <div class="calendar-arrows">
+      <button class="nav-button" (click)="prevMonth()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button class="nav-button" (click)="nextMonth()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="weekdays">
+    <span *ngFor="let day of weekdays">{{ day }}</span>
+  </div>
+
+  <div class="days-grid">
+    <span *ngFor="let cell of totalCells" [ngClass]="{'outside-month': cell.isOutsideMonth}" class="day">
+      {{ cell.day }}
+    </span>
+  </div>
+</div>

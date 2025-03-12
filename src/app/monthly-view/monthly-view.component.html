@@ -1,0 +1,20 @@
+<div class="monthly-view">
+  <h3>{{ getFormattedMonth() }}</h3>
+  <div class="month-grid">
+    <div
+      class="day-cell day-header"
+      *ngFor="let day of weekDays; let i = index"
+    >
+      <span class="day-name">{{ day }}</span>
+      <span class="day-number">{{ daysInMonth[i]?.getDate() }}</span>
+    </div>
+
+    <div
+      class="day-cell"
+      *ngFor="let day of daysInMonth.slice(7)"
+      [class.outside-month]="day.getMonth() !== currentDate.getMonth()"
+    >
+      <span class="day-number">{{ day.getDate() }}</span>
+    </div>
+  </div>
+</div>

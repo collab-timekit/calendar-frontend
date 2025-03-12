@@ -1,0 +1,66 @@
+aside {
+  position: fixed;
+  top: 60px; /* Sidebar zaczyna się poniżej headera */
+  width: 250px;
+  background: #f8f9fa;
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  padding: 20px 15px;
+  align-items: center;
+}
+
+aside.collapsed {
+  width: 0;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.mini-calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  max-width: 250px;
+}
+
+.create-btn {
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  padding: 12px 20px;
+  border-radius: 15px; /* Zaokrąglone krawędzie */
+  border: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Przestrzeń między ikoną a tekstem */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 20px; /* Odstęp od pozostałych elementów */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodany cień */
+}
+
+.create-btn mat-icon {
+  font-size: 20px;
+}
+
+.create-btn:hover {
+  background-color: #98a8ba; /* Ciemniejszy kolor przy hoverze */
+  transform: translateY(-2px); /* Mała animacja */
+}
+
+.create-btn:active {
+  transform: translateY(0); /* Przytrzymanie przycisku */
+}
