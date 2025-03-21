@@ -1,6 +1,6 @@
-<div class="mini-calendar">
+<div class="mini-calendar-root ">
   <div class="calendar-header">
-    <span class="month-year">{{ currentMonth }} {{ currentYear }}</span>
+    <span class="month-year">{{ currentDay.toLocaleString('default', { month: 'long' }) }} {{ currentDay.getFullYear() }}</span>
     <div class="calendar-arrows">
       <button class="nav-button" (click)="prevMonth()">
         <mat-icon>chevron_left</mat-icon>
@@ -16,7 +16,8 @@
   </div>
 
   <div class="days-grid">
-    <span *ngFor="let cell of totalCells" [ngClass]="{'outside-month': cell.isOutsideMonth}" class="day">
+    <span *ngFor="let cell of totalCells" [ngClass]="{'outside-month': cell.isOutsideMonth,
+                                                      'current-day': cell.isCurrentDate}" class="day">
       {{ cell.day }}
     </span>
   </div>

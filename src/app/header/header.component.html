@@ -3,29 +3,27 @@
     <button class="burger-menu" (click)="onToggleSidebar()">
       <mat-icon>menu</mat-icon>
     </button>
-
     <div class="logo">Calendar</div>
   </div>
 
   <div class="tools">
-    <button class="icon-button">
+    <button class="icon-button search-button">
       <mat-icon>search</mat-icon>
     </button>
 
     <div class="view-selector">
       <button class="dropdown-button" (click)="toggleDropdown()">
-        View <mat-icon>arrow_drop_down</mat-icon>
+        {{ currentView }} <mat-icon>arrow_drop_down</mat-icon>
       </button>
       <div class="dropdown-menu" *ngIf="dropdownOpen">
-        <button (click)="setView('day')">Day</button>
-        <button (click)="setView('week')">Week</button>
-        <button (click)="setView('month')">Month</button>
-        <button (click)="setView('year')">Year</button>
+        <button (click)="setView('daily')">Daily</button>
+        <button (click)="setView('weekly')">Weekly</button>
+        <button (click)="setView('monthly')">Monthly</button>
       </div>
     </div>
 
-    <div class="user-avatar">
-      <img ngSrc="https://static.vecteezy.com/system/resources/previews/002/640/730/large_2x/default-avatar-placeholder-profile-icon-male-vector.jpg" alt="User" width="44" height="44">
+    <div class="user-info">
+      <span class="user-name">{{ userName }}</span>
     </div>
   </div>
 </header>

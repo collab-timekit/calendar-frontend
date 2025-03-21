@@ -10,8 +10,6 @@ const isAccessAllowed = async (
   const { authenticated, grantedRoles } = authData;
   const requiredRole = route.data['role'];
 
-  console.log(grantedRoles);
-
   if (!requiredRole) {
     return false;
   }

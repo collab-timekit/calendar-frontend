@@ -1,15 +1,13 @@
 aside {
   position: fixed;
-  top: 60px; /* Sidebar zaczyna się poniżej headera */
+  top: 60px;
   width: 250px;
   background: #f8f9fa;
   height: 100%;
-  transition: width 0.3s ease-in-out;
-  overflow: hidden;
+  //transition: width 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
-  z-index: 999;
-  padding: 20px 15px;
+  padding: 20px 0;
   align-items: center;
 }
 
@@ -18,8 +16,6 @@ aside.collapsed {
 }
 
 .toggle-btn {
-  background: none;
-  border: none;
   font-size: 24px;
   cursor: pointer;
   padding: 10px;
@@ -29,7 +25,6 @@ aside.collapsed {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
   margin-top: 20px;
   max-width: 250px;
 }
@@ -43,11 +38,8 @@ aside.collapsed {
   border: none;
   display: flex;
   justify-content: center;
-  gap: 10px; /* Przestrzeń między ikoną a tekstem */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  width: 100%;
-  max-width: 200px;
   margin-bottom: 20px; /* Odstęp od pozostałych elementów */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodany cień */
 }

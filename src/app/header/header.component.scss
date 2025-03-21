@@ -2,115 +2,122 @@
   position: fixed;
   width: 100%;
   height: 60px;
-  background: #fff;
+  background: linear-gradient(135deg, #4c8bf5, #285cc4);
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  padding-right: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  color: white;
+}
 
-  .app-brand {
-    display: flex;
-    align-items: center;
-    width: 250px; /* Szerokość dla aplikacji */
-    gap: 10px;
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.burger-menu {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
   }
+}
 
-  .burger-menu {
-    background: transparent;
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.view-selector {
+  position: relative;
+}
+
+.dropdown-button {
+  background: white;
+  color: #285cc4;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #ebebeb;
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  margin-top: 5px;
+
+  button {
+    background: none;
     border: none;
-    font-size: 24px;
+    padding: 10px 15px;
     cursor: pointer;
-    margin-right: 15px;
-  }
-
-  .logo {
-    font-size: 20px;
-    font-weight: bold;
-    margin-right: auto;
-  }
-
-  .tools {
-    display: flex;
-    align-items: center;
-    margin-left: auto; /* Ustawia elementy po prawej stronie */
-    gap: 15px; /* Odstępy między elementami */
-  }
-
-  .view-selector {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .dropdown-button {
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    border: #333333 solid 1px;
-  }
-
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    border-radius: 5px;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 5px 0;
-    margin-top: 5px;
-  }
-
-  .dropdown-menu button {
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
     text-align: left;
     width: 100%;
-  }
+    transition: background-color 0.2s;
 
-  .dropdown-menu button:hover {
-    color: white;
+    &:hover {
+      background: #285cc4;
+      color: white;
+    }
   }
+}
 
-  .icon-button {
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
-  }
+.icon-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  color: white;
 
-  .icon-button mat-icon {
-    font-size: 20px;
-    color: gray;
-  }
-
-  .icon-button:hover {
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
     transform: scale(1.1);
   }
 
-  .icon-button:active {
+  &:active {
     transform: scale(0.95);
   }
+}
 
-  .user-avatar {
-    margin-right: 30px; /* Odstęp między avatar a prawą krawędzią */
-
-    img {
-      border-radius: 50%;
-    }
-  }
+.user-info {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
 }

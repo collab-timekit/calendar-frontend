@@ -15,6 +15,7 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class MiniCalendarComponent {
   currentDate: Date;
+  currentDay: Date;
   currentMonth!: string;
   currentYear!: number;
   startDay: number = 0;
@@ -23,6 +24,7 @@ export class MiniCalendarComponent {
 
   constructor() {
     this.currentDate = new Date();
+    this.currentDay = new Date();
     this.updateCalendar();
   }
 
@@ -38,21 +40,30 @@ export class MiniCalendarComponent {
     const totalCells = Array.from({ length: 42 }, (_, i) => i);
 
     this.totalCells = totalCells.map(i => {
+      let day = null;
+      let isOutsideMonth = false;
+      let isCurrentDate = false;
+
       if (i < this.startDay || i >= this.startDay + totalDays) {
         const prevMonth = subMonths(this.currentDate, 1);
         const prevMonthDays = getDaysInMonth(prevMonth);
 
-        let day = null;
         if (i < this.startDay) {
           day = prevMonthDays - (this.startDay - i - 1);
+          isOutsideMonth = true;
         } else if (i >= this.startDay + totalDays) {
           day = i - (this.startDay + totalDays) + 1;
+          isOutsideMonth = true;
         }
-
-        return { day, isOutsideMonth: true };
       } else {
-        return { day: i - this.startDay + 1, isOutsideMonth: false };
+        day = i - this.startDay + 1;
       }
+
+      if (!isOutsideMonth && day === this.currentDay.getDate() && this.currentYear === this.currentDay.getFullYear() && this.currentMonth === this.currentDay.toLocaleString('default', { month: 'long' })) {
+        isCurrentDate = true;
+      }
+
+      return { day, isOutsideMonth, isCurrentDate };
     });
   }
 

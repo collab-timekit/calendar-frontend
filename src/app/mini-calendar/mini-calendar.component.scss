@@ -1,4 +1,4 @@
-.mini-calendar {
+.mini-calendar-root {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,10 +9,16 @@
     margin-left: 10px;
   }
 
+  .current-day {
+    background-color: #487dfa;
+    color: white;
+    border-radius: 50%;
+  }
+
   .calendar-header {
-    display: flex; /* Zmieniamy z grid na flex */
+    display: flex;
     align-items: center;
-    justify-content: space-between; /* Wyrównanie w poziomie do lewej */
+    justify-content: space-between;
     width: 100%;
     font-size: 14px;
 

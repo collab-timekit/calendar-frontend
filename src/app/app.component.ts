@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import {RouterOutlet} from '@angular/router';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {HeaderComponent} from './header/header.component';
+import {CalendarComponent} from './calendar/calendar.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   imports: [
-    RouterOutlet,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    CalendarComponent
   ]
 })
 export class AppComponent {

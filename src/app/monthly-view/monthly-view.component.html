@@ -1,20 +1,29 @@
 <div class="monthly-view">
-  <h3>{{ getFormattedMonth() }}</h3>
   <div class="month-grid">
-    <div
-      class="day-cell day-header"
-      *ngFor="let day of weekDays; let i = index"
-    >
+    <div class="day-cell day-header" *ngFor="let day of weekDays; let i = index">
       <span class="day-name">{{ day }}</span>
-      <span class="day-number">{{ daysInMonth[i]?.getDate() }}</span>
+      <span class="day-number">{{ daysInMonth[i].getDate() }}</span>
     </div>
 
-    <div
-      class="day-cell"
-      *ngFor="let day of daysInMonth.slice(7)"
-      [class.outside-month]="day.getMonth() !== currentDate.getMonth()"
-    >
+    <div class="day-cell" *ngFor="let day of daysInMonth.slice(7)" [class.outside-month]="day.getMonth() !== currentDate.getMonth()">
       <span class="day-number">{{ day.getDate() }}</span>
+
+      <div *ngIf="getEventsForDay(day).length > 0">
+        <div *ngIf="getEventsForDay(day).length <= 3; else moreThanThree">
+          <div *ngFor="let event of getEventsForDay(day)" class="event-item">
+            {{ event.name }}
+          </div>
+        </div>
+
+        <ng-template #moreThanThree>
+          <div *ngFor="let event of getEventsForDay(day).slice(0, 2)" class="event-item">
+            {{ event.name }}
+          </div>
+          <div *ngIf="getEventsForDay(day).length > 3" class="more-events">
+            <span>+{{ getEventsForDay(day).length - 2 }} more...</span>
+          </div>
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>

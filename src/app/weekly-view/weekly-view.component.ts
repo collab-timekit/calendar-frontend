@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DatePipe, NgForOf } from '@angular/common';
+import {DatePipe, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-weekly-view',
@@ -10,10 +10,15 @@ import { DatePipe, NgForOf } from '@angular/common';
 export class WeeklyViewComponent implements OnInit {
   @Input() currentDate!: Date;
   daysInWeek: Date[] = [];
+  currentTimePosition: number = 0;
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
 
   ngOnInit(): void {
     this.updateWeeklyView();
+    this.updateCurrentTime();
+    setInterval(() => {
+      this.updateCurrentTime();
+    }, 60000);
   }
 
   updateWeeklyView(): void {
@@ -29,9 +34,8 @@ export class WeeklyViewComponent implements OnInit {
     }
   }
 
-  getFormattedWeek(): string {
-    const start = this.daysInWeek[0].toLocaleDateString();
-    const end = this.daysInWeek[6].toLocaleDateString();
-    return `${start} - ${end}`;
+  updateCurrentTime(): void {
+    const currentHour = new Date().getHours();
+    this.currentTimePosition = (100 / 24) * currentHour;
   }
 }

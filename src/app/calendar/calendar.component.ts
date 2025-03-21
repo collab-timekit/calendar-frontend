@@ -3,6 +3,7 @@ import {NgIf} from '@angular/common';
 import {MonthlyViewComponent} from '../monthly-view/monthly-view.component';
 import {WeeklyViewComponent} from '../weekly-view/weekly-view.component';
 import {DailyViewComponent} from '../daily-view/daily-view.component';
+import {CalendarViewService} from '../services/calendar-view.service';
 
 @Component({
   selector: 'app-calendar',
@@ -17,25 +18,13 @@ import {DailyViewComponent} from '../daily-view/daily-view.component';
 })
 export class CalendarComponent implements OnInit {
   currentDate: Date = new Date();
-  viewMode: 'daily' | 'weekly' | 'monthly' = 'monthly';
+  viewMode: 'daily' | 'weekly' | 'monthly' = 'weekly';
 
-  constructor() {}
+  constructor(private calendarViewService: CalendarViewService) {}
 
-  ngOnInit(): void {}
-
-  changeViewMode(mode: 'daily' | 'weekly' | 'monthly'): void {
-    this.viewMode = mode;
-  }
-
-  prevMonth(): void {
-    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-  }
-
-  nextMonth(): void {
-    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-  }
-
-  goToToday(): void {
-    this.currentDate = new Date();
+  ngOnInit(): void {
+    this.calendarViewService.viewMode$.subscribe(mode => {
+      this.viewMode = mode;
+    });
   }
 }
