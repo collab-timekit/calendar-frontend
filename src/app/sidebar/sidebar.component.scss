@@ -40,7 +40,6 @@ aside.collapsed {
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-bottom: 20px; /* Odstęp od pozostałych elementów */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodany cień */
 }
 
@@ -55,4 +54,33 @@ aside.collapsed {
 
 .create-btn:active {
   transform: translateY(0); /* Przytrzymanie przycisku */
+}
+
+.calendar-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.calendar-list {
+  list-style: none;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.calendar-item {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.calendar-item input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.calendar-item label {
+  cursor: pointer;
 }

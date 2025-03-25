@@ -1,22 +1,23 @@
 <header class="header">
   <div class="app-brand">
-    <button class="burger-menu" (click)="onToggleSidebar()">
+    <button class="burger-menu" (click)="onToggleSidebar()" aria-label="Open menu">
       <mat-icon>menu</mat-icon>
     </button>
     <div class="logo">Calendar</div>
   </div>
 
   <div class="tools">
-    <button class="icon-button search-button">
+    <button class="icon-button search-button" aria-label="Search">
       <mat-icon>search</mat-icon>
     </button>
 
     <div class="view-selector">
-      <button class="dropdown-button" (click)="toggleDropdown()">
-        {{ currentView }} <mat-icon>arrow_drop_down</mat-icon>
+      <button class="dropdown-button" (click)="toggleDropdown()" aria-haspopup="true">
+        {{ currentView }}
+        <mat-icon>arrow_drop_down</mat-icon>
       </button>
-      <div class="dropdown-menu" *ngIf="dropdownOpen">
-        <button (click)="setView('daily')">Daily</button>
+      <div class="dropdown-menu" [class.show]="dropdownOpen">
+      <button (click)="setView('daily')">Daily</button>
         <button (click)="setView('weekly')">Weekly</button>
         <button (click)="setView('monthly')">Monthly</button>
       </div>

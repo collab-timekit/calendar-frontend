@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {EventService} from '../services/event.service';
-import {NgForOf} from '@angular/common';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { EventService } from '../services/event.service';
+import { CalendarViewService } from '../services/calendar-view.service';
+import { NgForOf } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-daily-view',
@@ -10,15 +12,31 @@ import {NgForOf} from '@angular/common';
   ],
   styleUrls: ['./daily-view.component.scss']
 })
-export class DailyViewComponent implements OnInit {
-  @Input() currentDate!: Date;
+export class DailyViewComponent implements OnInit, OnDestroy {
+  currentDate: Date = new Date();
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
   events: any[] = [];
+  private subscription!: Subscription;
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private calendarService: CalendarViewService
+  ) {}
 
   ngOnInit(): void {
-    // Po załadowaniu komponentu pobieramy wydarzenia dla dnia
+    this.subscription = this.calendarService.selectedDate$.subscribe(date => {
+      this.currentDate = date;
+      this.loadEvents();
+    });
+
+    this.loadEvents();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  loadEvents(): void {
     this.events = this.eventService.getEventsForDay(this.currentDate);
   }
 

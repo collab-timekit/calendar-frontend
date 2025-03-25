@@ -1,24 +1,30 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
-import {NgIf, NgOptimizedImage} from '@angular/common';
 import {CalendarViewService} from '../services/calendar-view.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   imports: [
-    MatIcon,
-    NgIf
+    MatIcon
   ],
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   @Output() toggleSidebar = new EventEmitter<void>();
   dropdownOpen: boolean = false;
   currentView: 'daily' | 'weekly' | 'monthly' = 'weekly';
-  userName: string = 'John Doe';
+  userName!: string;
 
-  constructor(private calendarViewService: CalendarViewService) {}
+  constructor(
+    private calendarViewService: CalendarViewService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.userName = this.authService.getUserData()?.username;
+  }
 
   setView(view: 'daily' | 'weekly' | 'monthly') {
     this.currentView = view;

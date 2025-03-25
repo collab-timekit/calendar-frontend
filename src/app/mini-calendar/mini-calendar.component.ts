@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
+import { CalendarViewService } from '../services/calendar-view.service';
 import { getDaysInMonth, startOfMonth, getDay, subMonths, addMonths } from 'date-fns';
 import {NgClass, NgForOf} from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-mini-calendar',
   templateUrl: './mini-calendar.component.html',
   imports: [
+    NgClass,
     NgForOf,
-    MatIcon,
-    NgClass
+    MatIcon
   ],
   styleUrls: ['./mini-calendar.component.scss']
 })
@@ -21,10 +22,17 @@ export class MiniCalendarComponent {
   startDay: number = 0;
   weekdays: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   totalCells: any[] = [];
+  selectedDate!: Date;
 
-  constructor() {
+  constructor(private calendarService: CalendarViewService) {
     this.currentDate = new Date();
     this.currentDay = new Date();
+
+    this.calendarService.selectedDate$.subscribe(date => {
+      this.selectedDate = date;
+      this.updateCalendar();
+    });
+
     this.updateCalendar();
   }
 
@@ -43,6 +51,7 @@ export class MiniCalendarComponent {
       let day = null;
       let isOutsideMonth = false;
       let isCurrentDate = false;
+      let isSelectedDate = false;
 
       if (i < this.startDay || i >= this.startDay + totalDays) {
         const prevMonth = subMonths(this.currentDate, 1);
@@ -59,11 +68,17 @@ export class MiniCalendarComponent {
         day = i - this.startDay + 1;
       }
 
-      if (!isOutsideMonth && day === this.currentDay.getDate() && this.currentYear === this.currentDay.getFullYear() && this.currentMonth === this.currentDay.toLocaleString('default', { month: 'long' })) {
+      const cellDate = new Date(this.currentYear, this.currentDate.getMonth(), day ?? 1);
+
+      if (!isOutsideMonth && cellDate.toDateString() === this.currentDay.toDateString()) {
         isCurrentDate = true;
       }
 
-      return { day, isOutsideMonth, isCurrentDate };
+      if (!isOutsideMonth && cellDate.toDateString() === this.selectedDate.toDateString()) {
+        isSelectedDate = true;
+      }
+
+      return { day, isOutsideMonth, isCurrentDate, isSelectedDate, cellDate };
     });
   }
 
@@ -75,5 +90,11 @@ export class MiniCalendarComponent {
   nextMonth() {
     this.currentDate = addMonths(this.currentDate, 1);
     this.updateCalendar();
+  }
+
+  selectDate(cell: any) {
+    if (!cell.isOutsideMonth) {
+      this.calendarService.setSelectedDate(cell.cellDate);
+    }
   }
 }

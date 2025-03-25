@@ -1,21 +1,23 @@
+/* Header - poprawiona wersja */
 .header {
   position: fixed;
   width: 100%;
   height: 60px;
-  background: linear-gradient(135deg, #4c8bf5, #285cc4);
+  background: linear-gradient(135deg, #3a3a3a, #1f1f1f);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-right: 40px;
+  padding: 0 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   color: white;
 }
 
+/* Logo i przycisk menu */
 .app-brand {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .burger-menu {
@@ -32,67 +34,21 @@
 }
 
 .logo {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
+  color: white;
 }
 
+/* Sekcja narzędzi */
 .tools {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.view-selector {
-  position: relative;
-}
-
-.dropdown-button {
-  background: white;
-  color: #285cc4;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #ebebeb;
-  }
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  padding: 5px 0;
-  margin-top: 5px;
-
-  button {
-    background: none;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background: #285cc4;
-      color: white;
-    }
-  }
-}
-
+/* Ikony narzędziowe */
 .icon-button {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -105,7 +61,7 @@
   color: white;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
     transform: scale(1.1);
   }
 
@@ -114,10 +70,67 @@
   }
 }
 
-.user-info {
+/* Dropdown - styl poprawiony */
+.view-selector {
+  position: relative;
+}
+
+.dropdown-button {
+  background: white;
+  color: #285cc4;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
   display: flex;
   align-items: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
+  cursor: pointer;
+  border: 1px solid #285cc4;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  width: 150px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(5px);
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background-color 0.2s;
+  font-size: 14px;
+  color: #333;
+
+  &:hover {
+    background: #285cc4;
+    color: white;
+  }
 }

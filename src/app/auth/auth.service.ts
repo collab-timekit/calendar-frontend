@@ -1,11 +1,11 @@
-import {inject, Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import Keycloak from 'keycloak-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly keycloak = inject(Keycloak);
+  constructor(private readonly keycloak: Keycloak) {}
 
   getUserData() {
     if (this.keycloak.authenticated) {

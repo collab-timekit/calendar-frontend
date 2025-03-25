@@ -1,9 +1,44 @@
-html, body {
-  margin: 0;      /* Usuwamy domyślne marginesy */
-  padding: 0;     /* Usuwamy domyślne paddingi */
+/* Globalne style dla ciała dokumentu */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
 }
 
-.app-container{
-  height: 100%;   /* Zapewnia, że HTML i body zajmują pełną wysokość ekranu */
-  width: 100%;
+/* Resetowanie domyślnych marginesów i paddingów */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fajny, niestandardowy suwak */
+::-webkit-scrollbar {
+  width: 12px; /* szerokość suwaka */
+  height: 12px; /* wysokość suwaka w przypadku poziomego scrolla */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9aafb8; /* kolor suwaka */
+  border-radius: 10px; /* zaokrąglenie krawędzi suwaka */
+  border: 3px solid #fff; /* białe tło wokół suwaka */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #78a5a5; /* zmiana koloru po najechaniu */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* kolor tła suwaka */
+  border-radius: 10px; /* zaokrąglenie krawędzi śledzi suwaka */
+}
+
+::-webkit-scrollbar-track:hover {
+  background-color: #e0e0e0; /* zmiana koloru tła po najechaniu */
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1; /* kolor rogów */
 }

@@ -17,7 +17,6 @@ import {CalendarViewService} from '../services/calendar-view.service';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  currentDate: Date = new Date();
   viewMode: 'daily' | 'weekly' | 'monthly' = 'weekly';
 
   constructor(private calendarViewService: CalendarViewService) {}

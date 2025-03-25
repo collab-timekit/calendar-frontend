@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
 import {EventService} from '../services/event.service';
+import {Subscription} from 'rxjs';
+import {CalendarViewService} from '../services/calendar-view.service';
 
 @Component({
   selector: 'app-monthly-view',
@@ -8,15 +10,27 @@ import {EventService} from '../services/event.service';
   imports: [NgForOf, NgIf],
   styleUrls: ['./monthly-view.component.scss']
 })
-export class MonthlyViewComponent implements OnInit {
-  @Input() currentDate!: Date;
+export class MonthlyViewComponent implements OnInit, OnDestroy {
+  currentDate: Date = new Date();
   daysInMonth: Date[] = [];
   weekDays: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  private subscription!: Subscription;
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private calendarService: CalendarViewService
+  ) {}
 
   ngOnInit(): void {
     this.updateMonthlyView();
+    this.subscription = this.calendarService.selectedDate$.subscribe(date => {
+      this.currentDate = date;
+      this.updateMonthlyView();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   updateMonthlyView(): void {
