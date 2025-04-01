@@ -1,0 +1,37 @@
+<div class="monthly-view">
+  <div class="month-grid">
+    <div class="day-cell" *ngFor="let day of weekDays; let i = index" [ngClass]="{
+        'outside-month': totalCells[i]?.isOutsideMonth,
+        'current-day': totalCells[i]?.isCurrentDate,
+        'selected-day': totalCells[i]?.isSelectedDate
+      }">
+      <span class="day-name">{{ day }}</span>
+      <span class="day-number">{{ totalCells[i]?.day }}</span>
+    </div>
+
+    <div class="day-cell" *ngFor="let cell of totalCells.slice(7); trackBy: trackByCell" [ngClass]="{
+        'outside-month': cell.isOutsideMonth,
+        'current-day': cell.isCurrentDate,
+        'selected-day': cell.isSelectedDate
+      }">
+      <span class="day-number">{{ cell.day }}</span>
+
+      <div *ngIf="events$[cell.cellDate.toISOString().split('T')[0]] | async as events">
+        <div *ngIf="events.length <= 3; else moreThanThree">
+          <div *ngFor="let event of events" class="event-item">
+            {{ event.title }}
+          </div>
+        </div>
+
+        <ng-template #moreThanThree>
+          <div *ngFor="let event of events.slice(0, 2)" class="event-item">
+            {{ event.title }}
+          </div>
+          <div *ngIf="events.length > 3" class="more-events">
+            <span>+{{ events.length - 2 }} more...</span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

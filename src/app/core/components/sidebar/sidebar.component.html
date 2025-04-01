@@ -1,0 +1,19 @@
+<aside [class.collapsed]="collapsed">
+  <div class="sidebar-content" *ngIf="!collapsed">
+    <button class="create-btn" (click)="onCreateClick()">
+      <mat-icon>add</mat-icon> Create
+    </button>
+
+    <div class="mini-calendar">
+      <app-mini-calendar></app-mini-calendar>
+    </div>
+
+    <h3 class="calendar-title">Calendars</h3>
+    <ul class="calendar-list">
+      <li *ngFor="let calendar of calendars" class="calendar-item">
+        <input type="checkbox" [id]="calendar.id" />
+        <label [for]="calendar.id">{{ calendar.name }}</label>
+      </li>
+    </ul>
+  </div>
+</aside>

@@ -1,0 +1,66 @@
+<div class="popup-overlay" *ngIf="visible">
+  <div class="popup-content" [ngStyle]="{ top: position.top + 'px', left: position.left + 'px' }">
+
+    <div class="popup-header">
+      <span class="popup-title">Create Event</span>
+      <button class="close-button" (click)="closePopup()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <form>
+      <div class="form-group">
+        <label for="calendar">Calendar:</label>
+        <select id="calendar" [(ngModel)]="calendarId" name="calendarId">
+          <option *ngFor="let calendar of calendars" [value]="calendar.id">{{ calendar.name }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="event-title">Title:</label>
+        <input id="event-title" type="text" [(ngModel)]="eventTitle" name="eventTitle" required />
+      </div>
+
+      <div class="form-group">
+        <label for="event-description">Description:</label>
+        <textarea id="event-description" [(ngModel)]="eventDescription" name="eventDescription"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-start">Start Time:</label>
+          <input id="event-start" type="datetime-local" [(ngModel)]="eventStartTime" name="eventStartTime" required />
+        </div>
+
+        <div class="form-group">
+          <label for="event-end">End Time:</label>
+          <input id="event-end" type="datetime-local" [(ngModel)]="eventEndTime" name="eventEndTime" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="event-location">Location:</label>
+        <input id="event-location" type="text" [(ngModel)]="eventLocation" name="eventLocation" />
+      </div>
+
+      <div class="form-group">
+        <label>Attendees:</label>
+        <div *ngFor="let attendee of attendees; let i = index" class="attendee-item">
+          <input type="email" [(ngModel)]="attendees[i]" name="attendee{{i}}" placeholder="Enter email" />
+          <button type="button" (click)="removeAttendee(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <button type="button" class="add-attendee-button" (click)="addAttendee()">
+          <mat-icon>add</mat-icon> Add Attendee
+        </button>
+      </div>
+
+      <div class="form-buttons">
+        <button type="button" class="save-button" (click)="saveEvent()">
+          <mat-icon>save</mat-icon> Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

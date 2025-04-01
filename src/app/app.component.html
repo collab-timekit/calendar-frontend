@@ -1,10 +1,1 @@
-<div class="layout">
-  <app-header (toggleSidebar)="toggleSidebar()"></app-header>
-
-  <div class="main">
-    <app-sidebar [collapsed]="isSidebarCollapsed"></app-sidebar>
-    <div class="content" [class.collapsed]="!isSidebarCollapsed">
-      <app-calendar/>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet>

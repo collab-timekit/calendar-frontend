@@ -1,0 +1,107 @@
+.weekly-view {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  flex: 1;
+}
+
+.weekly-grid {
+  display: grid;
+  grid-template-columns: 50px repeat(7, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.hour-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px; /* Wyrównanie do nagłówków dni */
+}
+
+.hour-label {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+}
+
+.day-column {
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.day-header {
+  text-align: center;
+  font-weight: bold;
+  background: #f0f0f0;
+  font-size: 14px;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.hour-row {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid #ddd;
+}
+
+.event-slot {
+  flex: 1;
+  background-color: white;
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.event-slot:hover {
+  background: #d0f0d0;
+  cursor: pointer;
+}
+.day-header:hover {
+  background: #e0e0e0;
+}
+
+.today {
+  background: #007bff;
+  color: white;
+  border-bottom: 3px solid #0056b3;
+}
+
+.day-content {
+  position: relative;
+}
+
+.current-time-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: red;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
+    position: absolute;
+    left: -5px; /* Pozycja kółka na początku linii */
+  }
+}

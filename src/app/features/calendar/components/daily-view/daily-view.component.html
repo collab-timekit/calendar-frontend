@@ -1,0 +1,15 @@
+<div class="day-view">
+  <h3>{{ getFormattedDate() }}</h3>
+  <div class="day-grid">
+    <div *ngFor="let hour of hours" class="hour-row">
+      <div class="hour-label">{{ hour }}:00</div>
+      <div class="events">
+        <ul>
+          <li *ngFor="let event of eventsByHour[hour]">
+            {{ event.title }} - {{ event.startTime }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
