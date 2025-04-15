@@ -4,8 +4,8 @@ import {MonthlyViewComponent} from '../../components/monthly-view/monthly-view.c
 import {WeeklyViewComponent} from '../../components/weekly-view/weekly-view.component';
 import {DailyViewComponent} from '../../components/daily-view/daily-view.component';
 import {CalendarViewService} from '../../services/calendar-view.service';
-import {HeaderComponent} from '../../../../core/components/header/header.component';
-import {SidebarComponent} from '../../../../core/components/sidebar/sidebar.component';
+import {HeaderComponent} from '@core/components/header/header.component';
+import {SidebarComponent} from '@core/components/sidebar/sidebar.component';
 import {EventPopupComponent} from '@features/calendar/components/event-popup/event-popup.component';
 
 @Component({
@@ -30,7 +30,7 @@ export class CalendarComponent implements OnInit {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 
-  constructor(private calendarViewService: CalendarViewService) {}
+  constructor(private readonly calendarViewService: CalendarViewService) {}
 
   ngOnInit(): void {
     this.calendarViewService.viewMode$.subscribe(mode => {

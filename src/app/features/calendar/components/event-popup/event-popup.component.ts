@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import {NgForOf, NgIf, NgStyle} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {MatIcon} from '@angular/material/icon';
@@ -12,7 +12,7 @@ import {MatIcon} from '@angular/material/icon';
 export class EventPopupComponent {
   @Input() visible = false;
   @Input() position = { top: 100, left: 100 };
-  @Input() calendars: { id: number, name: string }[] = []; // Lista kalendarzy
+  @Input() calendars: { id: number, name: string }[] = [];
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<any>();
 
@@ -27,8 +27,6 @@ export class EventPopupComponent {
   isDragging = false;
   offsetX = 0;
   offsetY = 0;
-
-  constructor(private elementRef: ElementRef) {}
 
   closePopup() {
     this.close.emit();
@@ -47,7 +45,7 @@ export class EventPopupComponent {
       startTime: this.eventStartTime,
       endTime: this.eventEndTime,
       location: this.eventLocation,
-      attendees: this.attendees.filter(email => email.trim() !== '') // Usunięcie pustych wpisów
+      attendees: this.attendees.filter(email => email.trim() !== '')
     });
 
     this.closePopup();

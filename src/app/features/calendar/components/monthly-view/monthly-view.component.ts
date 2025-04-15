@@ -19,7 +19,8 @@ export class MonthlyViewComponent implements OnInit {
   weekDays: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   events$: { [key: string]: BehaviorSubject<Event[]> } = {};
 
-  constructor(private eventService: EventService, private calendarService: CalendarViewService) {}
+  constructor(private readonly eventService: EventService,
+              private readonly calendarService: CalendarViewService) {}
 
   ngOnInit(): void {
     this.calendarService.selectedDate$.subscribe(date => {
@@ -91,7 +92,7 @@ export class MonthlyViewComponent implements OnInit {
     });
   }
 
-  trackByCell(index: number, cell: any): string {
+  trackByCell(cell: any): string {
     return cell.cellDate.toISOString();
   }
 }

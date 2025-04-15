@@ -9,10 +9,10 @@ import Keycloak from 'keycloak-js';
   providedIn: 'root'
 })
 export class CalendarService {
-  private apiUrl = `${environment.apiUrl}/v1/calendars`;
+  private readonly apiUrl = `${environment.apiUrl}/v1/calendars`;
 
-  constructor(private http: HttpClient,
-              private keycloak: Keycloak) {}
+  constructor(private readonly http: HttpClient,
+              private readonly keycloak: Keycloak) {}
 
   private getAuthHeaders(): HttpHeaders {
     const token = this.keycloak.token;

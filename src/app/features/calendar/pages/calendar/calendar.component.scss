@@ -18,11 +18,10 @@ app-header {
 
 .main {
   display: flex;
-  flex: 1; /* Umożliwia zajęcie całej dostępnej przestrzeni */
-  overflow: hidden; /* Zapobiega scrollowaniu całego main */
+  flex: 1;
+  overflow: hidden;
 }
 
-/* Sidebar */
 app-sidebar {
   max-width: 250px;
   transition: max-width 0.3s ease-in-out, min-width 0.3s ease-in-out, width 0.3s ease-in-out;
@@ -33,11 +32,10 @@ app-sidebar[collapsed] {
   background-color: transparent;
 }
 
-/* Content */
 .content {
   flex: 1;
-  overflow: auto; /* Scroll pojawi się tylko tutaj */
-  height: 100%; /* Upewniamy się, że content nie rozciąga main */
+  overflow: auto;
+  height: 100%;
 }
 
 .content.collapsed {

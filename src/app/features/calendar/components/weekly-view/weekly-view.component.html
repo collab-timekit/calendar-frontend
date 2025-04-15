@@ -1,13 +1,10 @@
 <div class="weekly-view">
   <div class="weekly-grid">
-    <!-- Kolumna godzin -->
     <div class="hour-column">
       <div class="hour-label" *ngFor="let hour of hours">
         {{ hour }}:00
       </div>
     </div>
-
-    <!-- Kolumny dni tygodnia -->
     <div *ngFor="let day of daysInWeek" class="day-column">
       <div
         class="day-header"
@@ -19,8 +16,6 @@
         <div class="hour-row" *ngFor="let hour of hours">
           <div class="event-slot"></div>
         </div>
-
-        <!-- Linia aktualnej godziny, jeśli dzień to dzisiaj -->
         <div *ngIf="isToday(day)" class="current-time-line" [ngStyle]="{'top': currentTimePosition + '%'}"></div>
       </div>
     </div>

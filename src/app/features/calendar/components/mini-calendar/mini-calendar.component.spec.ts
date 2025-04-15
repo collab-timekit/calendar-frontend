@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MiniCalendarComponent } from './mini-calendar.component';
 
 describe('MiniCalendarComponent', () => {

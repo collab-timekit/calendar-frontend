@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { DatePipe, NgForOf, NgIf, NgStyle } from '@angular/common';
 import { CalendarViewService } from '../../services/calendar-view.service';
 import { Subscription } from 'rxjs';
@@ -9,17 +9,16 @@ import { Subscription } from 'rxjs';
   imports: [DatePipe, NgForOf, NgStyle, NgIf],
   styleUrls: ['./weekly-view.component.scss']
 })
-export class WeeklyViewComponent implements OnInit {
+export class WeeklyViewComponent implements OnInit, OnDestroy {
   currentDate: Date = new Date();
   daysInWeek: Date[] = [];
   currentTimePosition: number = 0;
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
   private subscription!: Subscription;
 
-  constructor(private calendarService: CalendarViewService) {}
+  constructor(private readonly calendarService: CalendarViewService) {}
 
   ngOnInit(): void {
-    // Subskrybujemy zmiany wybranej daty
     this.subscription = this.calendarService.selectedDate$.subscribe(date => {
       this.currentDate = date;
       this.updateWeeklyView();
@@ -53,8 +52,6 @@ export class WeeklyViewComponent implements OnInit {
     const now = new Date();
     const currentHour = now.getHours();
     const currentMinutes = now.getMinutes();
-
-    // Obliczamy dokładną pozycję w procentach, uwzględniając minuty
     this.currentTimePosition = ((currentHour * 60 + currentMinutes) / (24 * 60)) * 100;
   }
 
@@ -65,10 +62,6 @@ export class WeeklyViewComponent implements OnInit {
       today.getMonth() === day.getMonth() &&
       today.getFullYear() === day.getFullYear()
     );
-  }
-
-  isCurrentWeek(): boolean {
-    return this.daysInWeek.some(day => this.isToday(day));
   }
 
   onDayClick(day: Date): void {

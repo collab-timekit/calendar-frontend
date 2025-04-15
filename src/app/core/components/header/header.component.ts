@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
-import {CalendarViewService} from '../../../features/calendar/services/calendar-view.service';
+import {CalendarViewService} from '@features/calendar/services/calendar-view.service';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit{
   userName!: string;
 
   constructor(
-    private calendarViewService: CalendarViewService,
-    private authService: AuthService
+    private readonly calendarViewService: CalendarViewService,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {

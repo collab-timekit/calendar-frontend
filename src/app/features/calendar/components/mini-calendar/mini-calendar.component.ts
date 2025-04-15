@@ -24,7 +24,7 @@ export class MiniCalendarComponent {
   totalCells: any[] = [];
   selectedDate!: Date;
 
-  constructor(private calendarService: CalendarViewService) {
+  constructor(private readonly calendarService: CalendarViewService) {
     this.currentDate = new Date();
     this.currentDay = new Date();
 

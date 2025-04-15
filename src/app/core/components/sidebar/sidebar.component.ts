@@ -20,10 +20,10 @@ import { CalendarService } from '@features/calendar/services/calendar.service';
 })
 export class SidebarComponent implements OnInit {
   @Input() collapsed = false;
-  @Output() createEvent = new EventEmitter<void>(); // Dodajemy EventEmitter
+  @Output() createEvent = new EventEmitter<void>();
   calendars: Calendar[] = [];
 
-  constructor(private calendarService: CalendarService) {}
+  constructor(private readonly calendarService: CalendarService) {}
 
   ngOnInit(): void {
     this.loadCalendars();
@@ -36,6 +36,6 @@ export class SidebarComponent implements OnInit {
   }
 
   onCreateClick(): void {
-    this.createEvent.emit(); // Emitujemy zdarzenie po kliknięciu
+    this.createEvent.emit();
   }
 }

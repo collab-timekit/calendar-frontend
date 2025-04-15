@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { CalendarViewService } from '../../services/calendar-view.service';
 import { Event } from '@features/calendar/models/event.model';
-import { AsyncPipe, NgForOf } from '@angular/common';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-daily-view',
   templateUrl: './daily-view.component.html',
   imports: [
-    NgForOf,
-    AsyncPipe
+    NgForOf
   ],
   styleUrls: ['./daily-view.component.scss']
 })
@@ -20,8 +19,8 @@ export class DailyViewComponent implements OnInit {
   eventsByHour: { [hour: number]: Event[] } = {};
 
   constructor(
-    private eventService: EventService,
-    private calendarService: CalendarViewService
+    private readonly eventService: EventService,
+    private readonly calendarService: CalendarViewService
   ) {}
 
   ngOnInit(): void {

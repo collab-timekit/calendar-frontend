@@ -1,4 +1,3 @@
-/* Globalne style dla ciała dokumentu */
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -7,38 +6,36 @@ body {
   width: 100vw;
 }
 
-/* Resetowanie domyślnych marginesów i paddingów */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Fajny, niestandardowy suwak */
 ::-webkit-scrollbar {
-  width: 12px; /* szerokość suwaka */
-  height: 12px; /* wysokość suwaka w przypadku poziomego scrolla */
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #9aafb8; /* kolor suwaka */
-  border-radius: 10px; /* zaokrąglenie krawędzi suwaka */
-  border: 3px solid #fff; /* białe tło wokół suwaka */
+  background-color: #9aafb8;
+  border-radius: 10px;
+  border: 3px solid #fff;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #78a5a5; /* zmiana koloru po najechaniu */
+  background-color: #78a5a5;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* kolor tła suwaka */
-  border-radius: 10px; /* zaokrąglenie krawędzi śledzi suwaka */
+  background-color: #f1f1f1;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track:hover {
-  background-color: #e0e0e0; /* zmiana koloru tła po najechaniu */
+  background-color: #e0e0e0;
 }
 
 ::-webkit-scrollbar-corner {
-  background-color: #f1f1f1; /* kolor rogów */
+  background-color: #f1f1f1;
 }

@@ -4,7 +4,6 @@ aside {
   width: 250px;
   background: #f8f9fa;
   height: 100%;
-  //transition: width 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   padding: 20px 0;
@@ -34,13 +33,13 @@ aside.collapsed {
   color: black;
   font-size: 16px;
   padding: 12px 20px;
-  border-radius: 15px; /* Zaokrąglone krawędzie */
+  border-radius: 15px;
   border: none;
   display: flex;
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dodany cień */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .create-btn mat-icon {
@@ -48,12 +47,12 @@ aside.collapsed {
 }
 
 .create-btn:hover {
-  background-color: #98a8ba; /* Ciemniejszy kolor przy hoverze */
-  transform: translateY(-2px); /* Mała animacja */
+  background-color: #98a8ba;
+  transform: translateY(-2px);
 }
 
 .create-btn:active {
-  transform: translateY(0); /* Przytrzymanie przycisku */
+  transform: translateY(0);
 }
 
 .calendar-title {

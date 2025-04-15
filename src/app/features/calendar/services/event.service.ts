@@ -10,10 +10,10 @@ import Keycloak from 'keycloak-js';
   providedIn: 'root',
 })
 export class EventService {
-  private apiUrl = `${environment.apiUrl}/events`;
+  private readonly apiUrl = `${environment.apiUrl}/events`;
 
-  constructor(private http: HttpClient,
-              private keycloak: Keycloak) {}
+  constructor(private readonly http: HttpClient,
+              private readonly keycloak: Keycloak) {}
 
   private getAuthHeaders(): HttpHeaders {
     const token = this.keycloak.token;

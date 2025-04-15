@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 25px; /* Wyrównanie do nagłówków dni */
+  padding-top: 25px;
 }
 
 .hour-label {
@@ -102,6 +102,6 @@
     background: red;
     border-radius: 50%;
     position: absolute;
-    left: -5px; /* Pozycja kółka na początku linii */
+    left: -5px;
   }
 }

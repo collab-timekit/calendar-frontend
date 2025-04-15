@@ -6,7 +6,7 @@
 .hour-row {
   display: flex;
   align-items: center;
-  width: 100%;  /* Upewnia się, że linia obejmuje całą szerokość */
+  width: 100%;
 }
 
 .hour-label {
@@ -15,7 +15,7 @@
   padding-right: 10px;
   font-size: 14px;
   color: #555;
-  flex-shrink: 0; /* Zapobiega zwężaniu */
+  flex-shrink: 0;
   align-self: flex-start;
 }
 
@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   padding-left: 10px;
-  flex-grow: 1; /* Rozciąga events na całą szerokość */
+  flex-grow: 1;
   border-bottom: 1px solid #ddd;
   border-left: 1px solid #ddd;
   height: 100%;
