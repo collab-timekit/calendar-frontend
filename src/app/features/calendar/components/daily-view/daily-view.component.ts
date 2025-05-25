@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class DailyViewComponent implements OnInit, OnDestroy {
   currentDate: Date = new Date();
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
-  eventsByHour: { [hour: number]: any[] } = {};
+  allEvents: any[] = [];
 
   currentTimePosition: number = 0;
 
@@ -43,19 +43,8 @@ export class DailyViewComponent implements OnInit, OnDestroy {
 
   loadEvents(): void {
     this.eventService.getEventsForDay(this.currentDate).subscribe(events => {
-      this.eventsByHour = this.organizeEventsByHour(events);
+      this.allEvents = events;
     });
-  }
-
-  organizeEventsByHour(events: any[]): { [hour: number]: any[] } {
-    return events.reduce((acc, event) => {
-      const hour = new Date(event.startTime).getHours();
-      if (!acc[hour]) {
-        acc[hour] = [];
-      }
-      acc[hour].push(event);
-      return acc;
-    }, {} as { [hour: number]: any[] });
   }
 
   getFormattedDate(): string {
@@ -64,7 +53,7 @@ export class DailyViewComponent implements OnInit, OnDestroy {
 
   updateCurrentTime(): void {
     if (!this.isToday(this.currentDate)) {
-      this.currentTimePosition = -9999; // ukryj jeśli nie dzisiaj
+      this.currentTimePosition = -9999;
       return;
     }
     const now = new Date();
@@ -89,7 +78,6 @@ export class DailyViewComponent implements OnInit, OnDestroy {
     const boundingRect = hourRow.getBoundingClientRect();
     const relativeY = clickY - boundingRect.top;
 
-    // Wyliczamy minutę kliknięcia proporcjonalnie do wysokości wiersza
     const minute = Math.floor((relativeY / boundingRect.height) * 60);
 
     const start = new Date(this.currentDate);
@@ -98,7 +86,6 @@ export class DailyViewComponent implements OnInit, OnDestroy {
     const end = new Date(start);
     end.setMinutes(start.getMinutes() + 30);
 
-    // Przygotuj dane do popupu eventu
     this.newEventData = {
       calendarId: 1,
       title: '',
@@ -108,9 +95,9 @@ export class DailyViewComponent implements OnInit, OnDestroy {
       location: ''
     };
 
-    this.popupPosition = { top: event.clientY, left: event.clientX };
     this.popupVisible = true;
   }
+
 
   formatLocalDateTime(date: Date): string {
     const pad = (n: number) => n.toString().padStart(2, '0');
@@ -120,8 +107,6 @@ export class DailyViewComponent implements OnInit, OnDestroy {
   onEventSave(event: any): void {
     console.log('Zapisany event:', event);
     this.popupVisible = false;
-    // tutaj wywołaj serwis do zapisania eventu, np.
-    // this.eventService.saveEvent(event).subscribe(() => this.loadEvents());
   }
 
   previousDay(): void {
@@ -134,5 +119,17 @@ export class DailyViewComponent implements OnInit, OnDestroy {
     const next = new Date(this.currentDate);
     next.setDate(next.getDate() + 1);
     this.calendarService.setSelectedDate(next);
+  }
+
+  getEventTopPx(event: any): number {
+    const start = new Date(event.startTime);
+    return (start.getHours() * 60 + start.getMinutes()) * (1200 / (24 * 60));
+  }
+
+  getEventHeightPx(event: any): number {
+    const start = new Date(event.startTime);
+    const end = new Date(event.endTime);
+    const durationMinutes = (end.getTime() - start.getTime()) / (1000 * 60);
+    return durationMinutes * (1200 / (24 * 60));
   }
 }

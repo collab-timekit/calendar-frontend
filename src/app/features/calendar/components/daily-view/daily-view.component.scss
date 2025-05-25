@@ -87,4 +87,19 @@
   left: -5px;
 }
 
+.events {
+  position: relative; /* ważne, żeby pozycjonowanie absolutne eventów było względem kontenera */
+}
+
+.event-block {
+  background-color: #4a90e2;
+  color: white;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
 

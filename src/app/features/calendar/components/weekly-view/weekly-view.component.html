@@ -16,6 +16,14 @@
         <div class="hour-row" *ngFor="let hour of hours">
           <div class="event-slot"></div>
         </div>
+
+        <div
+          *ngFor="let event of getEventsForDay(day)"
+          class="calendar-event"
+          [ngStyle]="getEventStyle(event)">
+          {{ event.title }}
+        </div>
+
         <div *ngIf="isToday(day)" class="current-time-line" [ngStyle]="{'top': currentTimePosition + '%'}"></div>
       </div>
     </div>

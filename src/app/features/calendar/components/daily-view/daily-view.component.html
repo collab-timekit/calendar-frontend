@@ -5,20 +5,26 @@
     <button (click)="nextDay()">→</button>
   </div>
 
-  <div class="day-grid" (click)="onDayGridClick($event)">
-    <div *ngFor="let hour of hours; let i = index" class="hour-row" [attr.data-hour]="hour">
+  <div class="day-grid" (click)="onDayGridClick($event)" style="position: relative; height: 1200px;">
+    <div *ngFor="let hour of hours" class="hour-row" [attr.data-hour]="hour" style="height: 50px; border-bottom: 1px solid #ddd;">
       <div class="hour-label">{{ hour }}:00</div>
-      <div class="events">
-<!--        <ul>-->
-<!--          <li *ngFor="let event of eventsByHour[hour] || []">-->
-<!--            {{ event.title }} - {{ event.startTime | date: 'HH:mm' }}-->
-<!--          </li>-->
-<!--        </ul>-->
-      </div>
     </div>
 
-    <div *ngIf="isToday(currentDate)" class="current-time-line" [ngStyle]="{'top': currentTimePosition + '%'}"></div>
+    <div *ngFor="let event of allEvents" class="event-block"
+         [ngStyle]="{
+         top: getEventTopPx(event) + 'px',
+         height: getEventHeightPx(event) + 'px',
+         position: 'absolute',
+         left: '60px',
+         right: '10px'
+       }">
+      <strong>{{ event.title }}</strong><br/>
+      <small>{{ event.startTime | date:'HH:mm' }} - {{ event.endTime | date:'HH:mm' }}</small>
+    </div>
+
+    <div *ngIf="isToday(currentDate)" class="current-time-line" [ngStyle]="{'top': currentTimePosition * 12 + 'px'}"></div>
   </div>
+
 </div>
 
 <app-event-popup

@@ -4,6 +4,8 @@ import { CalendarViewService } from '../../services/calendar-view.service';
 import { Subscription } from 'rxjs';
 import { EventPopupComponent } from '@features/calendar/components/event-popup/event-popup.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {Event} from '@features/calendar/models/event.model';
+import {EventService} from '@features/calendar/services/event.service';
 
 @Component({
   selector: 'app-weekly-view',
@@ -20,6 +22,7 @@ export class WeeklyViewComponent implements OnInit, OnDestroy {
   hoveredDayContent: HTMLElement | null = null;
   popupVisible = false;
   popupPosition = { top: 0, left: 0 };
+  eventsPerDay: { [key: string]: Event[] } = {};
 
   newEventData: {
     calendarId?: number;
@@ -32,7 +35,8 @@ export class WeeklyViewComponent implements OnInit, OnDestroy {
   } = {};
 
   constructor(private readonly calendarService: CalendarViewService,
-              private readonly snackBar: MatSnackBar) {}
+              private readonly snackBar: MatSnackBar,
+              private readonly eventService: EventService,) {}
 
   ngOnInit(): void {
     this.subscription = this.calendarService.selectedDate$.subscribe(date => {
@@ -59,10 +63,16 @@ export class WeeklyViewComponent implements OnInit, OnDestroy {
     startOfWeek.setDate(this.currentDate.getDate() - adjustedDay);
 
     this.daysInWeek = [];
+
     for (let i = 0; i < 7; i++) {
       const day = new Date(startOfWeek);
       day.setDate(startOfWeek.getDate() + i);
       this.daysInWeek.push(day);
+
+      const key = day.toISOString().slice(0, 10);
+      this.eventService.getEventsForDay(day).subscribe(events => {
+        this.eventsPerDay[key] = events;
+      });
     }
   }
 
@@ -112,8 +122,6 @@ export class WeeklyViewComponent implements OnInit, OnDestroy {
       endTime: this.formatLocalDateTime(end),
       location: ''
     };
-
-    this.popupPosition = { top: event.clientY, left: event.clientX };
     this.popupVisible = true;
   }
 
@@ -166,5 +174,27 @@ export class WeeklyViewComponent implements OnInit, OnDestroy {
       horizontalPosition: 'center',
       panelClass: 'snackbar-success'
     });
+  }
+
+  getEventStyle(event: Event): { [key: string]: string } {
+    const start = new Date(event.startTime);
+    const end = new Date(event.endTime);
+
+    const totalMinutesInDay = 24 * 60;
+    const startMinutes = start.getHours() * 60 + start.getMinutes();
+    const endMinutes = end.getHours() * 60 + end.getMinutes();
+
+    const topPercent = (startMinutes / totalMinutesInDay) * 100;
+    const heightPercent = ((endMinutes - startMinutes) / totalMinutesInDay) * 100;
+
+    return {
+      top: `${topPercent}%`,
+      height: `${heightPercent}%`,
+    };
+  }
+
+  getEventsForDay(day: Date): Event[] {
+    const key = day.toISOString().slice(0, 10);
+    return this.eventsPerDay[key] || [];
   }
 }
