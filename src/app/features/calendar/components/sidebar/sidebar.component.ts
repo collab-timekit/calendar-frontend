@@ -1,22 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgForOf, NgIf } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
-import { MiniCalendarComponent } from '@features/calendar/components/mini-calendar/mini-calendar.component';
-import { FormsModule } from '@angular/forms';
 import { Calendar } from '@features/calendar/models/calendar.model';
 import { CalendarService } from '@features/calendar/services/calendar.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  imports: [
-    NgIf,
-    MatIcon,
-    MiniCalendarComponent,
-    NgForOf,
-    FormsModule
-  ],
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
+  standalone: false
 })
 export class SidebarComponent implements OnInit {
   @Input() collapsed = false;

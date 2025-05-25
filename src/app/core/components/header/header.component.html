@@ -17,14 +17,15 @@
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
       <div class="dropdown-menu" [class.show]="dropdownOpen">
-      <button (click)="setView('daily')">Daily</button>
-        <button (click)="setView('weekly')">Weekly</button>
-        <button (click)="setView('monthly')">Monthly</button>
+        <button routerLink="/calendar/day" routerLinkActive="active" (click)="dropdownOpen = false">Day</button>
+        <button routerLink="/calendar/week" routerLinkActive="active" (click)="dropdownOpen = false">Week</button>
+        <button routerLink="/calendar/month" routerLinkActive="active" (click)="dropdownOpen = false">Month</button>
+
       </div>
     </div>
 
-    <div class="user-info">
-      <span class="user-name">{{ userName }}</span>
-    </div>
+<!--    <div class="user-info">-->
+<!--      <span class="user-name">{{ userName }}</span>-->
+<!--    </div>-->
   </div>
 </header>

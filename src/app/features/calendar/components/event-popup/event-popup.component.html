@@ -11,42 +11,42 @@
     <form>
       <div class="form-group">
         <label for="calendar">Calendar:</label>
-        <select id="calendar" [(ngModel)]="calendarId" name="calendarId">
+        <select id="calendar" [(ngModel)]="event.calendarId" name="calendarId">
           <option *ngFor="let calendar of calendars" [value]="calendar.id">{{ calendar.name }}</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="event-title">Title:</label>
-        <input id="event-title" type="text" [(ngModel)]="eventTitle" name="eventTitle" required />
+        <input id="event-title" type="text" [(ngModel)]="event.title" name="title" required />
       </div>
 
       <div class="form-group">
         <label for="event-description">Description:</label>
-        <textarea id="event-description" [(ngModel)]="eventDescription" name="eventDescription"></textarea>
+        <textarea id="event-description" [(ngModel)]="event.description" name="description"></textarea>
       </div>
 
       <div class="form-row">
         <div class="form-group">
           <label for="event-start">Start Time:</label>
-          <input id="event-start" type="datetime-local" [(ngModel)]="eventStartTime" name="eventStartTime" required />
+          <input id="event-start" type="datetime-local" [(ngModel)]="event.startTime" name="startTime" required />
         </div>
 
         <div class="form-group">
           <label for="event-end">End Time:</label>
-          <input id="event-end" type="datetime-local" [(ngModel)]="eventEndTime" name="eventEndTime" required />
+          <input id="event-end" type="datetime-local" [(ngModel)]="event.endTime" name="endTime" required />
         </div>
       </div>
 
       <div class="form-group">
         <label for="event-location">Location:</label>
-        <input id="event-location" type="text" [(ngModel)]="eventLocation" name="eventLocation" />
+        <input id="event-location" type="text" [(ngModel)]="event.location" name="location" />
       </div>
 
       <div class="form-group">
         <label>Attendees:</label>
-        <div *ngFor="let attendee of attendees; let i = index" class="attendee-item">
-          <input type="email" [(ngModel)]="attendees[i]" name="attendee{{i}}" placeholder="Enter email" />
+        <div *ngFor="let attendee of event.attendees; let i = index" class="attendee-item">
+          <input type="email" [(ngModel)]="event.attendees[i].email" name="attendee{{i}}" placeholder="Enter email" />
           <button type="button" (click)="removeAttendee(i)">
             <mat-icon>delete</mat-icon>
           </button>

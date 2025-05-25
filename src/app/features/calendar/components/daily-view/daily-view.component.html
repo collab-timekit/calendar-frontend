@@ -1,15 +1,30 @@
 <div class="day-view">
-  <h3>{{ getFormattedDate() }}</h3>
-  <div class="day-grid">
-    <div *ngFor="let hour of hours" class="hour-row">
+  <div class="day-header">
+    <button (click)="previousDay()">←</button>
+    <span class="date-text">{{ getFormattedDate() }}</span>
+    <button (click)="nextDay()">→</button>
+  </div>
+
+  <div class="day-grid" (click)="onDayGridClick($event)">
+    <div *ngFor="let hour of hours; let i = index" class="hour-row" [attr.data-hour]="hour">
       <div class="hour-label">{{ hour }}:00</div>
       <div class="events">
-        <ul>
-          <li *ngFor="let event of eventsByHour[hour]">
-            {{ event.title }} - {{ event.startTime }}
-          </li>
-        </ul>
+<!--        <ul>-->
+<!--          <li *ngFor="let event of eventsByHour[hour] || []">-->
+<!--            {{ event.title }} - {{ event.startTime | date: 'HH:mm' }}-->
+<!--          </li>-->
+<!--        </ul>-->
       </div>
     </div>
+
+    <div *ngIf="isToday(currentDate)" class="current-time-line" [ngStyle]="{'top': currentTimePosition + '%'}"></div>
   </div>
 </div>
+
+<app-event-popup
+  [visible]="popupVisible"
+  [position]="popupPosition"
+  [event]="newEventData"
+  (close)="popupVisible = false"
+  (save)="onEventSave($event)">
+</app-event-popup>

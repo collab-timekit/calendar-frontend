@@ -12,7 +12,7 @@
         (click)="onDayClick(day)">
         {{ day | date: 'EEE, dd.MM' }}
       </div>
-      <div class="day-content">
+      <div class="day-content" (click)="onDayContentClick($event, day)">
         <div class="hour-row" *ngFor="let hour of hours">
           <div class="event-slot"></div>
         </div>
@@ -21,3 +21,11 @@
     </div>
   </div>
 </div>
+<app-event-popup
+  [visible]="popupVisible"
+  [position]="popupPosition"
+  [event]="newEventData"
+  (close)="popupVisible = false"
+  (save)="onEventSave($event)">
+</app-event-popup>
+

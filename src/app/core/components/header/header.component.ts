@@ -1,42 +1,44 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {MatIcon} from '@angular/material/icon';
-import {CalendarViewService} from '@features/calendar/services/calendar-view.service';
-import {AuthService} from '../../services/auth.service';
+import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  imports: [
-    MatIcon
-  ],
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  standalone: false
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, OnDestroy {
   @Output() toggleSidebar = new EventEmitter<void>();
-  dropdownOpen: boolean = false;
+  dropdownOpen = false;
   currentView: 'daily' | 'weekly' | 'monthly' = 'weekly';
-  userName!: string;
+  private routerSubscription?: Subscription;
 
-  constructor(
-    private readonly calendarViewService: CalendarViewService,
-    private readonly authService: AuthService
-  ) {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {
-    this.userName = this.authService.getUserData()?.username;
+    this.routerSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      if (event.url.includes('/calendar/day')) {
+        this.currentView = 'daily';
+      } else if (event.url.includes('/calendar/week')) {
+        this.currentView = 'weekly';
+      } else if (event.url.includes('/calendar/month')) {
+        this.currentView = 'monthly';
+      }
+    });
   }
 
-  setView(view: 'daily' | 'weekly' | 'monthly') {
-    this.currentView = view;
-    this.dropdownOpen = false;
-    this.calendarViewService.setViewMode(view);
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
   }
 
   onToggleSidebar(): void {
     this.toggleSidebar.emit();
   }
 
-  toggleDropdown() {
+  toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
 }

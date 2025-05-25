@@ -1,54 +1,55 @@
 .popup-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.2s ease;
   z-index: 1000;
+  padding: 20px;
 }
 
 .popup-content {
-  background: #fff;
-  padding: 20px;
-  max-width: 90vw;
+  background: #ffffff;
+  padding: 24px 28px;
+  width: 100%;
+  max-width: 520px;
   max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  position: absolute;
+  animation: slideIn 0.25s ease;
   overflow-y: auto;
-  transition: transform 0.2s ease-in-out;
+  position: relative;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
 .popup-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
   padding-bottom: 10px;
-  cursor: pointer;
-  width: 100%;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.popup-title {
+  color: #111827;
 }
 
 .close-button {
-  background: none;
+  background: transparent;
   border: none;
-  font-size: 22px;
   cursor: pointer;
-  color: #888;
-  transition: color 0.2s ease-in-out;
+  color: #6b7280;
+  transition: color 0.2s ease;
 
   &:hover {
-    color: #d9534f;
+    color: #ef4444;
   }
 
   mat-icon {
@@ -56,59 +57,72 @@
   }
 }
 
-.form-group {
-  margin-bottom: 14px;
+form {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 label {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 5px;
+  font-size: 13px;
+  color: #374151;
+  font-weight: 500;
 }
 
-input, select, textarea {
-  padding: 10px;
+input,
+select,
+textarea {
+  padding: 10px 12px;
   font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  transition: border 0.2s ease-in-out;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:focus {
-    border-color: #007bff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
     outline: none;
+    background: #fff;
   }
 }
 
 textarea {
-  resize: none;
+  resize: vertical;
 }
 
 .form-row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .attendee-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
+  gap: 10px;
 
   input {
     flex: 1;
   }
 
   button {
-    background: none;
+    background: transparent;
     border: none;
+    color: #ef4444;
     cursor: pointer;
-    color: #d9534f;
-    transition: color 0.2s ease-in-out;
 
     &:hover {
-      color: #c9302c;
+      color: #dc2626;
+    }
+
+    mat-icon {
+      font-size: 20px;
     }
   }
 }
@@ -117,15 +131,15 @@ textarea {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: none;
+  background: transparent;
   border: none;
   font-size: 14px;
-  color: #007bff;
+  font-weight: 500;
+  color: #3b82f6;
   cursor: pointer;
-  transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: #0056b3;
+    color: #1d4ed8;
   }
 
   mat-icon {
@@ -136,24 +150,25 @@ textarea {
 .form-buttons {
   display: flex;
   justify-content: flex-end;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .save-button {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #007bff;
+  background: #3b82f6;
   color: white;
   padding: 10px 16px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s ease-in-out;
+  transition: background 0.2s ease;
 
   &:hover {
-    background: #0056b3;
+    background: #2563eb;
   }
 
   mat-icon {
@@ -173,9 +188,11 @@ textarea {
 
 @keyframes slideIn {
   from {
-    transform: translateY(-20px);
+    transform: translateY(-16px);
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
   }
 }

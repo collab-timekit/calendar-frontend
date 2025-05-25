@@ -3,15 +3,11 @@
 
   <div class="main">
     <app-sidebar [collapsed]="isSidebarCollapsed" (createEvent)="openPopup()"></app-sidebar>
-    <app-event-popup
-      [visible]="popupVisible"
-      (close)="popupVisible = false"
-    ></app-event-popup>
+    <app-event-popup [visible]="popupVisible" (close)="popupVisible = false"></app-event-popup>
+
     <div class="content" [class.collapsed]="!isSidebarCollapsed">
       <div class="calendar">
-        <app-monthly-view *ngIf="viewMode === 'monthly'"></app-monthly-view>
-        <app-weekly-view *ngIf="viewMode === 'weekly'" ></app-weekly-view>
-        <app-daily-view *ngIf="viewMode === 'daily'"></app-daily-view>
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>

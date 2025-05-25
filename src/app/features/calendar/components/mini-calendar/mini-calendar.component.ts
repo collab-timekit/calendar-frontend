@@ -1,17 +1,11 @@
 import { Component } from '@angular/core';
 import { CalendarViewService } from '../../services/calendar-view.service';
 import { getDaysInMonth, startOfMonth, getDay, subMonths, addMonths } from 'date-fns';
-import {NgClass, NgForOf} from '@angular/common';
-import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-mini-calendar',
   templateUrl: './mini-calendar.component.html',
-  imports: [
-    NgClass,
-    NgForOf,
-    MatIcon
-  ],
+  standalone: false,
   styleUrls: ['./mini-calendar.component.scss']
 })
 export class MiniCalendarComponent {
@@ -20,7 +14,7 @@ export class MiniCalendarComponent {
   currentMonth!: string;
   currentYear!: number;
   startDay: number = 0;
-  weekdays: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  weekdays: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   totalCells: any[] = [];
   selectedDate!: Date;
 
@@ -42,7 +36,8 @@ export class MiniCalendarComponent {
 
   generateCalendar() {
     const totalDays = getDaysInMonth(this.currentDate);
-    this.startDay = getDay(startOfMonth(this.currentDate));
+    const rawStartDay = getDay(startOfMonth(this.currentDate));
+    this.startDay = (rawStartDay + 6) % 7;
     const totalCells = Array.from({ length: 42 }, (_, i) => i);
 
     this.totalCells = totalCells.map(i => {
